@@ -1,6 +1,7 @@
 // 基于node的 遵循commonjs规范的
 let path = require('path');//node的模块
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
 module.exports = {
     entry: './src/index.js', // 入口
     output: {
@@ -24,7 +25,11 @@ module.exports = {
             hash: true,
             template: './src/index.html',
             filename: 'index.html'
-        })],
+        }),
+        new Webpack.ProvidePlugin({
+            $: 'jquery'
+        })
+    ],
     mode: 'development', // 可以更改模式
     resolve: {}, // 配置解析
 }
