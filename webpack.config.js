@@ -27,7 +27,8 @@ module.exports = {
             filename: 'index.html'
         }),
         new Webpack.ProvidePlugin({
-            $: 'jquery'
+            $: 'jquery',
+            ng: 'angular',
         })
     ],
     mode: 'development', // 可以更改模式
