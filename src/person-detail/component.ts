@@ -1,13 +1,14 @@
 import MyApp, {$timeout} from '../app';
 import './style.less';
-
 $timeout(() => {
     console.log(' immediately hehe after haha');
 }, 1000);
 console.log('immediately haha');
 
 class PersonDetailController {
-    constructor(_$scope, $element) {
+    person: any;
+    $element: any;
+    constructor(_$scope: any, $element: any) {
         console.log(arguments);
         this.person = {
             name: 'laiq',
@@ -33,15 +34,15 @@ class PersonDetailController {
         this.$element.find('.partial').append($img);
     }
 
-    changeGold(gold) {
+    changeGold(gold: number) {
         this.person.gold += gold;
     }
 
-    changeAttack(attack) {
+    changeAttack(attack: number) {
         this.person.attack += attack;
     }
 
-    changeArmor(armor) {
+    changeArmor(armor: number) {
         this.person.armor += armor;
     }
 }
