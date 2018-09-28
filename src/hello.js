@@ -6,4 +6,4 @@ document.writeln('hello world');
 
 $(document.body).append('<div>jquery</div>');
 
-const MyApp = ng.module('MyApp', []);
+export const MyApp = ng.module('MyApp', []);

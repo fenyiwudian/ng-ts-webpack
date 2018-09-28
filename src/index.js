@@ -1,4 +1,4 @@
-import './hello';
+import './first-com/directive';
 
 console.log('index');
 

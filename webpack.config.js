@@ -16,7 +16,11 @@ module.exports = {
         port: 8080
     },
 
-    module: {}, // 模块配置
+    module: {
+        rules: [
+            { test: /\.html$/, use: ["html-loader"] }
+        ]
+    },
     plugins: [
         new HtmlWebpackPlugin({
             minify: {
