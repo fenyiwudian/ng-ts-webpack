@@ -21,15 +21,26 @@ module.exports = {
             { test: /\.html$/, use: ["html-loader"] },
             { test: /\.pug$/, use: ["pug-loader"] },
             {
+                test: /\.(png|gif|jpe?g)$/, 
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name]-[hash].[ext]',
+                        context: '',
+                    }
+                }]
+
+            },
+            {
                 test: /\.less$/,
                 use: [{
-                  loader: 'style-loader' // creates style nodes from JS strings
+                    loader: 'style-loader' // creates style nodes from JS strings
                 }, {
-                  loader: 'css-loader' // translates CSS into CommonJS
+                    loader: 'css-loader' // translates CSS into CommonJS
                 }, {
-                  loader: 'less-loader' // compiles Less to CSS
+                    loader: 'less-loader' // compiles Less to CSS
                 }]
-              }
+            }
         ]
     },
     plugins: [
@@ -44,6 +55,8 @@ module.exports = {
         new Webpack.ProvidePlugin({
             $: 'jquery',
             ng: 'angular',
+            // 为了让angular使用jquery的jqLite
+            'window.jQuery': 'jquery'
         })
     ],
     mode: 'development', // 可以更改模式

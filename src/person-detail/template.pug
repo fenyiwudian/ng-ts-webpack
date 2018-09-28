@@ -1,18 +1,22 @@
-div my first com
-div
+.title my first com
+.name
+  img(src=require('../../assets/person.jpg'))
   span name:
   span {{$ctrl.person.name}}
-div
+.gold
+  img(src=require("../../assets/gold.jpg"))
   span gold:
   span {{$ctrl.person.gold}}
   button(ng-click='$ctrl.changeGold(1)') +
   button(ng-click='$ctrl.changeGold(-1)') -
-div
+.attack
+  img(src=require('../../assets/attack.jpg'))
   span attack:
   span {{$ctrl.person.attack}}
   button(ng-click='$ctrl.changeAttack(1)') +
   button(ng-click='$ctrl.changeAttack(-1)') -
-div
+.armor
+  img(src=require('../../assets/armor.jpg'))
   span armor:
   span {{$ctrl.person.armor}}
   button(ng-click='$ctrl.changeArmor(1)') +
