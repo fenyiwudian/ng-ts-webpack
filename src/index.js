@@ -1,4 +1,4 @@
-import './first-com/directive';
+import './first-com/component';
 
 console.log('index');
 

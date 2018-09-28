@@ -173,12 +173,6 @@ ajv@^6.1.0:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-angular1-templateurl-loader@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/angular1-templateurl-loader/-/angular1-templateurl-loader-1.0.0.tgz#b056e19269f5058ed916c0085c6dd336c4983b5d"
-  dependencies:
-    loader-utils "^1.1.0"
-
 angular@^1.7.4:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.4.tgz#c1bf4884c2d470c06907737a1bf0835a9f646f31"
@@ -1161,10 +1155,6 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
-
 extglob@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/extglob/-/extglob-2.0.4.tgz#ad00fe4dc612a9232e8718711dc5cb5ab0285543"
@@ -1186,7 +1176,7 @@ fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
-fastparse@^1.0.0, fastparse@^1.1.1:
+fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
 
@@ -1470,7 +1460,7 @@ html-loader@^0.5.5:
     loader-utils "^1.1.0"
     object-assign "^4.1.1"
 
-html-minifier@^3.0.2, html-minifier@^3.2.3, html-minifier@^3.5.8:
+html-minifier@^3.2.3, html-minifier@^3.5.8:
   version "3.5.20"
   resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.20.tgz#7b19fd3caa0cb79f7cde5ee5c3abdf8ecaa6bb14"
   dependencies:
@@ -2146,15 +2136,6 @@ negotiator@0.6.1:
 neo-async@^2.5.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
-
-ng-cache-loader@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/ng-cache-loader/-/ng-cache-loader-0.0.26.tgz#f49076280f9d0b43c4fa29a3780630b2f7d1c3c3"
-  dependencies:
-    extend "^3.0.0"
-    fastparse "^1.0.0"
-    html-minifier "^3.0.2"
-    loader-utils "^1.1.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
