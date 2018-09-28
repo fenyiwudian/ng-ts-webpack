@@ -1,9 +1,8 @@
-import { MyApp } from '../hello';
-import './style.less'
+import MyApp from '../app';
+import './style.less';
 
 class PersonDetailController {
-
-    constructor($element) {
+    constructor(_$scope, $element) {
         console.log(arguments);
         this.person = {
             name: 'laiq',
@@ -36,6 +35,7 @@ class PersonDetailController {
         this.person.armor += armor;
     }
 }
+PersonDetailController.$inject = ['$scope', '$element'];
 
 MyApp.component('personDetail', {
     template: require('./template.pug')(),

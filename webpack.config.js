@@ -53,7 +53,7 @@ module.exports = {
         }),
         new Webpack.ProvidePlugin({
             $: 'jquery',
-            ng: 'angular',
+            angular: 'angular',
             'window.jQuery': 'jquery'
         }),
 
