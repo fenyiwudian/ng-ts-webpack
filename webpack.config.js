@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'build.js',
+        filename: 'build-[hash:8].js',
         path: path.resolve('./dist')
     },
     devServer: {
@@ -25,7 +25,7 @@ module.exports = {
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        name: '[name]-[hash].[ext]',
+                        name: '[name]-[hash:8].[ext]',
                         context: '',
                     }
                 }]
@@ -48,7 +48,6 @@ module.exports = {
             minify: {
                 removeAttributeQuotes: true
             },
-            hash: true,
             template: './src/index.pug',
             filename: 'index.html'
         }),
