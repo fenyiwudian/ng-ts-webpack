@@ -18,7 +18,8 @@ module.exports = {
 
     module: {
         rules: [
-            { test: /\.html$/, use: ["html-loader"] }
+            { test: /\.html$/, use: ["html-loader"] },
+            { test: /\.pug$/, use: ["pug-loader"] },
         ]
     },
     plugins: [
@@ -27,7 +28,7 @@ module.exports = {
                 removeAttributeQuotes: true
             },
             hash: true,
-            template: './src/index.html',
+            template: './src/index.pug',
             filename: 'index.html'
         }),
         new Webpack.ProvidePlugin({

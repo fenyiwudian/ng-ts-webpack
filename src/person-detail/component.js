@@ -1,7 +1,7 @@
 import {MyApp} from '../hello';
 
 
-class FirstCom {
+class PersonDetailController {
 
     constructor($scope, $element, $attrs){
         console.log($scope, $element, $attrs);
@@ -26,7 +26,7 @@ class FirstCom {
     }
 }
 
-MyApp.component('firstCom', {
-    template: require('./template.html'),
-    controller: FirstCom,
+MyApp.component('personDetail', {
+    template: require('./template.pug')(),
+    controller: PersonDetailController,
 });

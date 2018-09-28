@@ -1,0 +1,19 @@
+div my first com
+div
+  span name:
+  span {{$ctrl.person.name}}
+div
+  span gold:
+  span {{$ctrl.person.gold}}
+  button(ng-click='$ctrl.changeGold(1)') +
+  button(ng-click='$ctrl.changeGold(-1)') -
+div
+  span attack:
+  span {{$ctrl.person.attack}}
+  button(ng-click='$ctrl.changeAttack(1)') +
+  button(ng-click='$ctrl.changeAttack(-1)') -
+div
+  span armor:
+  span {{$ctrl.person.armor}}
+  button(ng-click='$ctrl.changeArmor(1)') +
+  button(ng-click='$ctrl.changeArmor(-1)') -
