@@ -20,6 +20,16 @@ module.exports = {
         rules: [
             { test: /\.html$/, use: ["html-loader"] },
             { test: /\.pug$/, use: ["pug-loader"] },
+            {
+                test: /\.less$/,
+                use: [{
+                  loader: 'style-loader' // creates style nodes from JS strings
+                }, {
+                  loader: 'css-loader' // translates CSS into CommonJS
+                }, {
+                  loader: 'less-loader' // compiles Less to CSS
+                }]
+              }
         ]
     },
     plugins: [

@@ -1,5 +1,5 @@
 import {MyApp} from '../hello';
-
+import './style.less'
 
 class PersonDetailController {
 
