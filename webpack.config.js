@@ -1,14 +1,14 @@
-// 基于node的 遵循commonjs规范的
-let path = require('path');//node的模块
+
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
-    entry: './src/index.js', // 入口
+    entry: './src/index.js',
     output: {
         filename: 'build.js',
-        // 这个路径必须是绝对路径
         path: path.resolve('./dist')
-    }, // 出口
+    },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         host: 'localhost',
@@ -34,11 +34,11 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: [{
-                    loader: 'style-loader' // creates style nodes from JS strings
+                    loader: 'style-loader'
                 }, {
-                    loader: 'css-loader' // translates CSS into CommonJS
+                    loader: 'css-loader'
                 }, {
-                    loader: 'less-loader' // compiles Less to CSS
+                    loader: 'less-loader'
                 }]
             }
         ]
@@ -55,11 +55,11 @@ module.exports = {
         new Webpack.ProvidePlugin({
             $: 'jquery',
             ng: 'angular',
-            // 为了让angular使用jquery的jqLite
             'window.jQuery': 'jquery'
-        })
+        }),
+
+        new CleanWebpackPlugin(path.resolve('./dist'))
     ],
-    mode: 'development', // 可以更改模式
-    resolve: {}, // 配置解析
+    mode: 'development', 
+    resolve: {},
 }
-// 在webpack中如何配置开发服务器 webpack-dev-server
