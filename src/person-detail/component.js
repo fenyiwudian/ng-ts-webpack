@@ -1,5 +1,10 @@
-import MyApp from '../app';
+import MyApp, {$timeout} from '../app';
 import './style.less';
+
+$timeout(() => {
+    console.log(' immediately hehe after haha');
+}, 1000);
+console.log('immediately haha');
 
 class PersonDetailController {
     constructor(_$scope, $element) {
@@ -11,6 +16,11 @@ class PersonDetailController {
             armor: 100,
         }
         this.$element = $element;
+        $timeout(() => {
+            console.log('hehe after haha');
+        }, 1000);
+        console.log('haha');
+
     }
 
     $postLink() {
