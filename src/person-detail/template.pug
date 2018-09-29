@@ -1,5 +1,7 @@
 .title my first com
 .name
+  //- 模板中使用图片资源,使用require即可,webpack.config.ts同时指定file-loader
+  //- 对他们进行处理
   img(src=require('../../assets/person.jpg'))
   span name:
   span {{$ctrl.person.name}}
