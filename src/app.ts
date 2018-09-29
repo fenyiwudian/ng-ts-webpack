@@ -9,11 +9,18 @@
 // 综合考虑,我们使用第一种方式,通知明确指定@ts-ignore绕过import检查,同时
 // angular又能得到ts类型检测支持
 //
-
+import loadLangData from './service/lang-loader';
 // @ts-ignore
-export default angular.module('MyApp', []);
-// @ts-ignore
-const $injector = angular.injector(['ng']);
+export const ng = angular;
+export const MyApp = ng.module('MyApp', ['pascalprecht.translate']);
+MyApp.config(['$translateProvider', function ($translateProvider: any) {
+    $translateProvider.translations('zh-CN',{
+        'TITLE': 'Hello',
+        'FOO': 'This is a paragraph'
+      });
+    $translateProvider.preferredLanguage('zh-CN');
+}]);
+const $injector = ng.injector(['ng', 'pascalprecht.translate']);
 
 // 在es5环境下编程时,angular的依赖注入机制被充分利用来
 // 对代码进行模块划分,使用了很多service,factory等,
@@ -36,3 +43,10 @@ export const $timeout = $injector.get('$timeout');
 export const $http = $injector.get('$http');
 export const $q = $injector.get('$q');
 export const $compile = $injector.get('$compile');
+export const $filter = $injector.get('$filter');
+
+
+
+loadLangData().then(({ data, code }) => {
+    ng.bootstrap(document.body, ['MyApp']);
+})

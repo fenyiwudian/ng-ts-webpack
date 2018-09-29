@@ -1,10 +1,12 @@
 
 // 此处展示了用语言级模块放置导入angular内置服务的方式
-import MyApp, {$timeout} from '../app';
+import {MyApp, $timeout} from '../app';
 // 直接导入样式,在webpack.config.ts配置文件中指定了对应的
 // less-loader/css-loader/style-loader处理导入的less文件,
 // webapck编译的时候会将样式放到head中
 import './style.less';
+
+import i18n from '../service/i18n';
 $timeout(() => {
     console.log(' immediately hehe after haha');
 }, 1000);
@@ -39,7 +41,14 @@ class PersonDetailController {
             'width': 350,
             'height': 200,
         })
-        this.$element.find('.partial').append($img);
+        const $partial = this.$element.find('.partial')
+        $partial.append($img);
+        // const message = i18n.translate('LANG.person.message', this.person);
+        setTimeout(() => {
+            const message = i18n.translate('TITLE');
+            $partial.append(`<div>${message}</div>`);
+        }, 1000);
+
     }
 
     changeGold(gold: number) {

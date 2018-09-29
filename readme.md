@@ -10,4 +10,8 @@
     - 业务脚本文件不再以一股脑打包成一本,而是从入口[src/index.ts](./src/index.ts)为入口靠webpack按模块依赖树收集代码并打包.
     - 各种压缩,文件hash处理都有各种插件和loader来准备处理,相比gulp自己使用某些插件来编程处理更为省心.
     - 有了dev-server,比起gulp中serve-watch任务,也更省心.
-+ 全面使用typescript/es6的语言级模块,除了某些特殊场合,不再使用依赖注入,不再使用anglaur的service和factory,参照[src/app.ts](./src/app.ts)中注释   
++ 全面使用typescript/es6的语言级模块,除了某些特殊场合,不再使用依赖注入,不再使用anglaur的service和factory,参照[src/app.ts](./src/app.ts)中注释
+
++ 更方便的config文件组织方式
+
++ 

@@ -2,14 +2,39 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const fs = require('fs');
+
+class I18NPlugin {
+    // @ts-ignore
+    apply(compiler) {
+        compiler.plugin('emit', function (compilation, callback) {
+            const langDir = 'lang';
+            const files = fs.readdirSync(langDir);
+
+            files.forEach(file => {
+                let lang;
+                lang = eval(fs.readFileSync(langDir + '/' + file).toString()
+                    .replace('export default', 'lang ='));
+                const prefix = file.substr(0, file.lastIndexOf('.'));
+                const content = JSON.stringify(lang);
+                compilation.assets[`lang-${prefix}.json`] = {
+                    source: () => { return content },
+                    size: () => { return content.length }
+                }
+            });
+            callback();
+        });
+    }
+}
+
+
 // @ts-ignore
 module.exports = (env) => {
-    console.log(env);
     return {
         entry: {
             // 插件可以单独抽出一本或多本,按需变化
             jquery: ['jquery'],
-            angular: ['angular'],
+            angular: ['angular', 'angular-translate'],
             // 自己的业务代码从入口开始层层依赖压成一本bundle.js
             // 需求不同也可以分成多本
             bundle: './src/index.ts',
@@ -87,7 +112,9 @@ module.exports = (env) => {
                 filename: 'index.html'
             }),
             // 这个插件会在每次构建之前清楚掉dist目录,省的dist中残留的僵尸文件越来越多
-            new CleanWebpackPlugin(path.resolve('./dist'))
+            new CleanWebpackPlugin(path.resolve('./dist')),
+            new I18NPlugin(),
+
         ],
         mode: 'development',
         resolve: {
