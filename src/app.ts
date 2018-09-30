@@ -13,11 +13,12 @@ import loadLangData from './service/lang-loader';
 // @ts-ignore
 export const ng = angular;
 export const MyApp = ng.module('MyApp', ['pascalprecht.translate']);
+console.log(MyApp);
 MyApp.config(['$translateProvider', function ($translateProvider: any) {
-    $translateProvider.translations('zh-CN',{
+    $translateProvider.translations('zh-CN', {
         'TITLE': 'Hello',
         'FOO': 'This is a paragraph'
-      });
+    });
     $translateProvider.preferredLanguage('zh-CN');
 }]);
 const $injector = ng.injector(['ng', 'pascalprecht.translate']);
@@ -43,9 +44,35 @@ export const $timeout = $injector.get('$timeout');
 export const $http = $injector.get('$http');
 export const $q = $injector.get('$q');
 export const $compile = $injector.get('$compile');
-export const $filter = $injector.get('$filter');
 
 
+interface IBuildInNgService {
+    $filter: angular.IFilterService;
+    $timeout: angular.ITimeoutService;
+    $http: angular.IHttpService;
+    $compile: angular.ICompileService;
+    $q: angular.IQService;
+}
+export const $service: IBuildInNgService = {
+    $timeout: $injector.get('$timeout'),
+    $http: $injector.get('$http'),
+} as any;
+
+
+MyApp.run(['$filter', '$timeout', '$http', '$q', '$compile', (
+    $filter: any,
+    $timeout: any,
+    $http: any,
+    $q: any,
+    $compile: any) => {
+    $service.$filter = $filter;
+    $service.$timeout = $timeout;
+    $service.$http = $http;
+    $service.$q = $q;
+    $service.$compile = $compile;
+    console.log('run', $filter('translate')('TITLE'));
+    console.log('run', ($service.$filter('translate') as any)('TITLE'));
+}]);
 
 loadLangData().then(({ data, code }) => {
     ng.bootstrap(document.body, ['MyApp']);

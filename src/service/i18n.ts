@@ -1,4 +1,4 @@
-import {$filter} from '../app'; 
+import {$service} from '../app'; 
 
 class I18N{
     private code = '';
@@ -14,7 +14,7 @@ class I18N{
     }
 
     translate(key: string, replacement?: any): string{
-        return ($filter('translate') as any)(key, replacement);
+        return ($service.$filter('translate') as any)(key, replacement);
     }
 }
 

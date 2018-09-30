@@ -1,10 +1,32 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist/",
-      "sourceMap": true,
-      "noImplicitAny": true,
-      "module": "es6",
-      "target": "es5",
-      "allowJs": true
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "checkJs": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "locale": "zh-CN",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noEmitOnError": false,
+    "noEmit": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "paths": {
+      "*": ["src/*", "config/*"]
     }
   }
+}

@@ -1,4 +1,4 @@
-import {$http} from '../app';
+import {$service} from '../app';
 import config  from 'config';
 const langSrc: any = {
     'en-US': 'lang-en-US.json',
@@ -7,7 +7,7 @@ const langSrc: any = {
 
 export default (code?: string) => {
     code = 'zh-CN';
-    return $http.get(config.host + '/' + langSrc[code])
+    return $service.$http.get(config.host + '/' + langSrc[code])
     .then(res => {
         return {
             data: res.data,
