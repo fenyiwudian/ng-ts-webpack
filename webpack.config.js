@@ -2,30 +2,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const fs = require('fs');
 
-class I18NPlugin {
-    // @ts-ignore
-    apply(compiler) {
-        compiler.plugin('emit', function (compilation, callback) {
-            const langDir = 'lang';
-            const files = fs.readdirSync(langDir);
 
-            files.forEach(file => {
-                let lang;
-                lang = eval(fs.readFileSync(langDir + '/' + file).toString()
-                    .replace('export default', 'lang ='));
-                const prefix = file.substr(0, file.lastIndexOf('.'));
-                const content = JSON.stringify(lang);
-                compilation.assets[`lang-${prefix}.json`] = {
-                    source: () => { return content },
-                    size: () => { return content.length }
-                }
-            });
-            callback();
-        });
-    }
-}
 
 
 // @ts-ignore
@@ -56,6 +34,16 @@ module.exports = (env) => {
 
         module: {
             rules: [
+                {
+                    test:/src\/service\/i18n\.ts$/,
+                    use: {
+                        loader:'./lang-loader.js',
+                        options: {
+                            dir: 'lang',
+                            env: env.NODE_ENV,
+                        },
+                    }
+                },
                 // jquery因为是umd模块的,所以别webpack打包后,全局将不会存在$和jQuery
                 // 而我们想沿用原来的全局使用的风格,所以使用expose-loader暴露一下
                 {
@@ -113,8 +101,6 @@ module.exports = (env) => {
             }),
             // 这个插件会在每次构建之前清楚掉dist目录,省的dist中残留的僵尸文件越来越多
             new CleanWebpackPlugin(path.resolve('./dist')),
-            new I18NPlugin(),
-
         ],
         mode: 'development',
         resolve: {

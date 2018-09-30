@@ -9,19 +9,6 @@
 // 综合考虑,我们使用第一种方式,通知明确指定@ts-ignore绕过import检查,同时
 // angular又能得到ts类型检测支持
 //
-import loadLangData from './service/lang-loader';
-// @ts-ignore
-export const ng = angular;
-export const MyApp = ng.module('MyApp', ['pascalprecht.translate']);
-console.log(MyApp);
-MyApp.config(['$translateProvider', function ($translateProvider: any) {
-    $translateProvider.translations('zh-CN', {
-        'TITLE': 'Hello',
-        'FOO': 'This is a paragraph'
-    });
-    $translateProvider.preferredLanguage('zh-CN');
-}]);
-const $injector = ng.injector(['ng', 'pascalprecht.translate']);
 
 // 在es5环境下编程时,angular的依赖注入机制被充分利用来
 // 对代码进行模块划分,使用了很多service,factory等,
@@ -40,6 +27,11 @@ const $injector = ng.injector(['ng', 'pascalprecht.translate']);
 // 这个使用方法在在person-detail/component.ts有演示.
 
 // 在person-detail/component.ts中有演示直接导入$timeout
+import i18n from './service/i18n';
+// @ts-ignore
+export const ng = angular;
+export const MyApp = ng.module('MyApp', ['pascalprecht.translate']);
+const $injector = ng.injector(['ng', 'pascalprecht.translate']);
 export const $timeout = $injector.get('$timeout');
 export const $http = $injector.get('$http');
 export const $q = $injector.get('$q');
@@ -70,10 +62,12 @@ MyApp.run(['$filter', '$timeout', '$http', '$q', '$compile', (
     $service.$http = $http;
     $service.$q = $q;
     $service.$compile = $compile;
-    console.log('run', $filter('translate')('TITLE'));
-    console.log('run', ($service.$filter('translate') as any)('TITLE'));
 }]);
 
-loadLangData().then(({ data, code }) => {
+i18n.load().then(({ data, code }) => {
+    MyApp.config(['$translateProvider', function ($translateProvider: any) {
+        $translateProvider.translations(code, data);
+        $translateProvider.preferredLanguage(code);
+    }]);
     ng.bootstrap(document.body, ['MyApp']);
 })

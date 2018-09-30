@@ -1,20 +1,35 @@
-import {$service} from '../app'; 
-
-class I18N{
+import { $service } from '../app';
+import config  from 'config';
+const langSrc: any = {
+    'en-US': 'en-US.ts',
+    'zh-CN': 'zh-CN.ts',
+}
+class I18N {
     private code = '';
-    put(){
+    put() {
 
     }
-    get(){
+    get() {
         return this.code || 'zh-CN';
     }
 
-    setLangCode(code: string){
+    setLangCode(code: string) {
         this.code = code;
     }
 
-    translate(key: string, replacement?: any): string{
+    translate(key: string, replacement?: any): string {
         return ($service.$filter('translate') as any)(key, replacement);
+    }
+
+    load() {
+        const code = this.get();
+        return $service.$http.get(config.host + '/' + langSrc[code])
+            .then(res => {
+                return {
+                    data: res.data,
+                    code,
+                }
+            });
     }
 }
 
