@@ -6,7 +6,6 @@ const LangPlugin = require('./lang-plugin');
 
 module.exports = (env) => {
     const local = env.NODE_ENV === 'local';
-    console.log(local, env.NODE_ENV);
     return {
         entry: {
             jquery: ['jquery'],
@@ -88,5 +87,5 @@ module.exports = (env) => {
                 config: path.join(__dirname, `config/${env.NODE_ENV}.ts`),
             },
         }
-    }
-}
+    };
+};

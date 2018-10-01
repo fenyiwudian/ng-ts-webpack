@@ -25,18 +25,18 @@ class PersonDetailController {
             gold: 100,
             attack: 100,
             armor: 100,
-        }
+        };
         this.$element = $element;
     }
     // component的生命周期函数之一
     $postLink() {
-        var $img = $('<img/>');
+        const $img = $('<img/>');
         $img.attr({
             'src': require('../../assets/man.jpg'),
             'width': 350,
             'height': 200,
-        })
-        const $partial = this.$element.find('.partial')
+        });
+        const $partial = this.$element.find('.partial');
         $partial.append($img);
         const message = i18n.translate('LANG.person.message', this.person);
         $partial.append(`<div>${message}</div>`);

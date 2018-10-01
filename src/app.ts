@@ -52,16 +52,16 @@ export const $service: IBuildInNgService = {
 
 
 MyApp.run(['$filter', '$timeout', '$http', '$q', '$compile', (
-    $filter: any,
-    $timeout: any,
-    $http: any,
-    $q: any,
-    $compile: any) => {
-    $service.$filter = $filter;
-    $service.$timeout = $timeout;
-    $service.$http = $http;
-    $service.$q = $q;
-    $service.$compile = $compile;
+    filter: any,
+    timeout: any,
+    http: any,
+    q: any,
+    compile: any) => {
+    $service.$filter = filter;
+    $service.$timeout = timeout;
+    $service.$http = http;
+    $service.$q = q;
+    $service.$compile = compile;
 }]);
 
 i18n.load().then(({ data, code }) => {
@@ -70,4 +70,4 @@ i18n.load().then(({ data, code }) => {
         $translateProvider.preferredLanguage(code);
     }]);
     ng.bootstrap(document.body, ['MyApp']);
-})
+});

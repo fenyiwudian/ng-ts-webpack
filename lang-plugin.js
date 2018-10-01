@@ -5,8 +5,7 @@ class LangPlugin {
         this.options = options || {};
     }
     apply(compiler) {
-        const {options: {local, directory}} = this;
-        // todo consider cache
+        const { options: { local, directory } } = this;
         compiler.plugin('emit', function (compilation, callback) {
             const files = fs.readdirSync(directory);
             files.forEach(file => {
@@ -26,7 +25,7 @@ class LangPlugin {
                     size: function () {
                         return text.length;
                     }
-                }
+                };
             });
             callback();
         });

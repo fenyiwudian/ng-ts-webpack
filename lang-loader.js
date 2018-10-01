@@ -8,6 +8,5 @@ module.exports = function (source) {
     const hash = local
         ? '' : '-' + hasha(source).substr(0, 8);
     const parsed = `export default "${code}${hash}.json"`;
-    console.log(parsed);
     return parsed;
-}
+};

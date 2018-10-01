@@ -1,9 +1,9 @@
 import { $service } from '../app';
-import config  from 'config';
+import config from 'config';
 const langSrc: any = {
     'en-US': require('../../lang/en-US'),
     'zh-CN': require('../../lang/zh-CN'),
-}
+};
 class I18N {
     private code = '';
     put() {
@@ -28,7 +28,7 @@ class I18N {
                 return {
                     data: res.data,
                     code,
-                }
+                };
             });
     }
 }

@@ -25,7 +25,7 @@
         "no-empty": false,
         "prefer-for-of": false,
         "no-bitwise": false,
-        "member-access": false,
+        "member-access": false
     },
     "rulesDirectory": []
 }
