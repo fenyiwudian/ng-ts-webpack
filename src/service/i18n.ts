@@ -7,7 +7,6 @@ const langSrc: any = {
 class I18N {
     private code = '';
     put() {
-
     }
     get() {
         return this.code || 'zh-CN';
