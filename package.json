@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prod": "webpack --env.NODE_ENV=prod",
-    "staging": "webpack --env.NODE_ENV=staging",
-    "start": "webpack-dev-server --open --env.NODE_ENV=local"
+    "prod": "webpack --env.NODE_ENV=prod --mode=production",
+    "staging": "webpack --env.NODE_ENV=staging --mode=development",
+    "start": "webpack-dev-server --open --env.NODE_ENV=local --mode=development"
   },
   "author": "",
   "license": "ISC",
