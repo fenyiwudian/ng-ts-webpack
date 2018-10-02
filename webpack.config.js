@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LangPlugin = require('./lang-plugin');
+const VendorPlugin = require('./vendor-plugin');
 
 module.exports = (env) => {
     const local = env.NODE_ENV === 'local';
@@ -12,8 +13,6 @@ module.exports = (env) => {
             angular: ['angular', 'angular-translate'],
             bundle: './src/index.ts',
         },
-
-        // devtool: 'inline-source-map',
         output: {
             filename: local ? '[name].js' : '[name]-[hash:8].js',
             path: path.resolve('./dist')
@@ -80,6 +79,12 @@ module.exports = (env) => {
             }),
             new CleanWebpackPlugin(path.resolve('./dist')),
             new LangPlugin({ directory: 'lang', local }),
+            new VendorPlugin({
+                'vendor': [
+                    'node_modules/sortablejs/Sortable.js',
+                    'node_modules/screenfull/dist/screenfull.js',
+                ]
+            })
         ],
         resolve: {
             extensions: ['.ts', '.js'],
