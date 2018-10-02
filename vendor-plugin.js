@@ -1,5 +1,6 @@
 const fs = require('fs');
 const hasha = require('hasha');
+var uglifyJs = require("uglify-js");
 class VendorPlugin {
     constructor(options) {
         this.options = options || {};
@@ -14,9 +15,21 @@ class VendorPlugin {
                 rs += fs.readFileSync(file).toString() + '\n//////\n';
                 return rs;
             }, '');
-            const hash = hasha(content).substr(0, 8);
-            const fileName = local ? `${key}.js` : `${key}-${hash}.js`;
-            dataList.unshift({fileName, content});
+            let fileName = '';
+            if (local) {
+                fileName = key;
+            } else {
+                const result = uglifyJs.minify(content);
+                if(result.error){
+                    throw result.error;
+                }else{
+                    content = result.code;
+                }
+                const hash = hasha(content).substr(0, 8);
+                const index = key.lastIndexOf('.');
+                fileName = `${key.substring(0, index)}-${hash}${key.substring(index)}`;
+            }
+            dataList.unshift({ fileName, content });
         });
 
         compiler.hooks.compilation.tap('VendorPlugin', (compilation) => {
@@ -24,8 +37,8 @@ class VendorPlugin {
                 'VendorPlugin',
                 (data, cb) => {
                     dataList.forEach(temp => {
-                        data.html = data.html.replace('</body>', 
-                        `<script src="${temp.fileName}"></script></body>`);
+                        data.html = data.html.replace('</body>',
+                            `<script src="${temp.fileName}"></script></body>`);
                     });
                     cb(null, data);
                 }

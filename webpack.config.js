@@ -80,7 +80,7 @@ module.exports = (env) => {
             new CleanWebpackPlugin(path.resolve('./dist')),
             new LangPlugin({ directory: 'lang', local }),
             new VendorPlugin({
-                'vendor': [
+                'vendor.js': [
                     'node_modules/sortablejs/Sortable.js',
                     'node_modules/screenfull/dist/screenfull.js',
                 ]
