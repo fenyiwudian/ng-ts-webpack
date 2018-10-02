@@ -6,11 +6,11 @@ class VendorPlugin {
         this.options = options || {};
     }
     apply(compiler) {
-        const { options, local } = this;
+        const { options: {local, vendors, before} } = this;
 
         const dataList = [];
-        Object.keys(options).forEach(key => {
-            const list = options[key];
+        Object.keys(vendors).forEach(key => {
+            const list = vendors[key];
             let content = list.reduce((rs, file) => {
                 rs += fs.readFileSync(file).toString() + '\n//////\n';
                 return rs;
@@ -29,7 +29,7 @@ class VendorPlugin {
                 const index = key.lastIndexOf('.');
                 fileName = `${key.substring(0, index)}-${hash}${key.substring(index)}`;
             }
-            dataList.unshift({ fileName, content });
+            dataList.push({ fileName, content });
         });
 
         compiler.hooks.compilation.tap('VendorPlugin', (compilation) => {
@@ -37,8 +37,9 @@ class VendorPlugin {
                 'VendorPlugin',
                 (data, cb) => {
                     dataList.forEach(temp => {
-                        data.html = data.html.replace('</body>',
-                            `<script src="${temp.fileName}"></script></body>`);
+                        const origin = `<script type=text/javascript src=${before}`;
+                        data.html = data.html.replace(origin,
+                            `<script type=text/javascript src=${temp.fileName}></script>${origin}`);
                     });
                     cb(null, data);
                 }
