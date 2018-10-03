@@ -63,7 +63,7 @@ class VendorPlugin {
       );
     });
 
-    compiler.plugin('emit', function (compilation, callback) {
+    compiler.hooks.emit.tap('VendorPlugin', function (compilation) {
       dataList.forEach(data => {
         compilation.assets[data.fileName] = {
           source() {
@@ -74,7 +74,6 @@ class VendorPlugin {
           }
         };
       });
-      callback();
     });
   }
 }

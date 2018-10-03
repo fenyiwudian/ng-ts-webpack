@@ -6,7 +6,7 @@ class LangPlugin {
     }
     apply(compiler) {
         const { options: { local, directory } } = this;
-        compiler.plugin('emit', function (compilation, callback) {
+        compiler.hooks.emit.tap('LangPlugin', function (compilation) {
             const files = fs.readdirSync(directory);
             files.forEach(file => {
                 const langCode = file.substr(0, file.lastIndexOf('.'));
@@ -27,7 +27,6 @@ class LangPlugin {
                     }
                 };
             });
-            callback();
         });
     }
 }
