@@ -82,7 +82,10 @@ module.exports = (env) => {
             new VendorPlugin({
                 local,
                 before: 'bundle',
-                vendors:{
+                vendors: {
+                    'vendor.css': [
+                        "node_modules/swiper/dist/css/swiper.css",
+                    ], 
                     'vendor.js': [
                         'node_modules/sortablejs/Sortable.js',
                         'node_modules/screenfull/dist/screenfull.js',
