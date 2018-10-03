@@ -1,0 +1,18 @@
+{
+  "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "auto_temp": true,
+      "dist": true,
+      "assets": true,
+      ".vscode": true,
+      "node_modules": true
+  },
+  "files.exclude": {
+      ".idea": true,
+      "auto_temp": true
+      // "dist": true
+  },
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+}
