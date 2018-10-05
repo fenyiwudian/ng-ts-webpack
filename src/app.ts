@@ -63,6 +63,7 @@ MyApp.config(['$translateProvider', function ($translateProvider: ng.translate.I
   $translateProvider.translations(code, data);
   $translateProvider.preferredLanguage(code);
   $translateProvider.useSanitizeValueStrategy('escape');
+  window.LANG.ngReady = true;
   console.log('lang ready');
 }]);
 $(function () {

@@ -13,6 +13,7 @@ req.onload = () => {
   window.LANG = {
     code,
     data: JSON.parse(req.responseText),
+    ngReady: false,
   };
 
   const script = document.createElement('script');
