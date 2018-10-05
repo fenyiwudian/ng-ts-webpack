@@ -10,6 +10,9 @@ class LangPlugin {
     compiler.hooks.emit.tap('LangPlugin', function (compilation) {
       const files = fs.readdirSync(directory);
       files.forEach(file => {
+        if (file.startsWith('.')) {
+          return;
+        }
         const langCode = file.substr(0, file.lastIndexOf('.'));
         let content = '';
         const origin = fs.readFileSync(`${directory}/${file}`).toString();
@@ -36,7 +39,7 @@ class LangPlugin {
 
       const originSrc = compilation.assets[langKey].source();
       const newSrc = originSrc.replace('bundle.js', prefix + '/' + bundleKey)
-      .replace('lang-assets-host-placeholder', prefix + '/');
+        .replace('lang-assets-host-placeholder', prefix + '/');
       compilation.assets[langKey] = {
         source: function () {
           return newSrc;
