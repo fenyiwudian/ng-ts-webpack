@@ -1,5 +1,4 @@
 console.log('init lang module start');
-import config from 'config';
 
 const langSrc: any = {
   'en-US': require('../lang/en-US'),
@@ -8,7 +7,7 @@ const langSrc: any = {
 
 const req = new XMLHttpRequest();
 const code = localStorage.getItem('lang-code') || 'zh-CN';
-req.open('GET', config.cdn + '/' + langSrc[code].default);
+req.open('GET', 'lang-assets-host-placeholder' + langSrc[code].default);
 req.onload = () => {
   window.LANG = {
     code,

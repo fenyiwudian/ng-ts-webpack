@@ -35,7 +35,8 @@ class LangPlugin {
       const langKey = assetsKeys.find(key => key.includes('lang'));
 
       const originSrc = compilation.assets[langKey].source();
-      const newSrc = originSrc.replace('bundle.js', prefix + '/' + bundleKey);
+      const newSrc = originSrc.replace('bundle.js', prefix + '/' + bundleKey)
+      .replace('lang-assets-host-placeholder', prefix + '/');
       compilation.assets[langKey] = {
         source: function () {
           return newSrc;

@@ -6,7 +6,6 @@ declare module 'config' {
 interface Config {
   env: string;
   host: string;
-  cdn: string;
 }
 
 
