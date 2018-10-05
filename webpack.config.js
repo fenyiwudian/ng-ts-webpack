@@ -7,9 +7,9 @@ const VendorPlugin = require('./vendor-plugin');
 const HtmlWebpackPrefixPlugin = require('html-webpack-prefix-plugin');
 
 const cdnConfig = {
-  local: 'http://localhost:8080/',
-  staging: 'https://staging.cdn.com/',
-  prod: 'https://prod.cdn.com/',
+  local: 'http://localhost:8080',
+  staging: 'https://staging.cdn.com',
+  prod: 'https://prod.cdn.com',
 };
 
 
@@ -20,7 +20,7 @@ module.exports = (env) => {
   return {
     entry: {
       jquery: ['jquery'],
-      angular: ['angular', 'angular-translate'],
+      lang: './src/lang.ts',
       bundle: './src/index.ts',
     },
     output: {
@@ -81,25 +81,26 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        // minify: {
-        //   removeAttributeQuotes: true
-        // },
         template: './src/index.pug',
         filename: 'index.html',
-        prefix: cdn,
+        prefix: cdn + '/',
+        excludeChunks: ['bundle']
       }),
       new HtmlWebpackPrefixPlugin(),
       new CleanWebpackPlugin(path.resolve('./dist')),
-      new LangPlugin({ directory: 'lang', local }),
+      new LangPlugin({ directory: 'lang', local, prefix: cdn }),
       new VendorPlugin({
         local,
         prefix: cdn,
-        jsBefore:'bundle',
+        jsBefore:'lang',
         vendors: {
           'vendor.css': [
             "node_modules/swiper/dist/css/swiper.css",
           ],
           'vendor.js': [
+            "node_modules/angular/angular.js",
+            "node_modules/angular-sanitize/angular-sanitize.js",
+            "node_modules/angular-translate/dist/angular-translate.js",
             'node_modules/sortablejs/Sortable.js',
             'node_modules/screenfull/dist/screenfull.js',
           ]

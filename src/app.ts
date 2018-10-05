@@ -25,49 +25,50 @@
 // 这种情况,因为组件的控制器已经改为一个class,所以依赖项会被注入到构造函数中.
 // 而依赖项正好使用这个class的静态属性$inject来指定,
 // 这个使用方法在在person-detail/component.ts有演示.
-
-// 在person-detail/component.ts中有演示直接导入$timeout
-import i18n from './service/i18n';
+console.log('init app module start');
 // @ts-ignore
 export const ng = angular;
-export const MyApp = ng.module('MyApp', ['pascalprecht.translate']);
-const $injector = ng.injector(['ng', 'pascalprecht.translate']);
-export const $timeout = $injector.get('$timeout');
-export const $http = $injector.get('$http');
-export const $q = $injector.get('$q');
-export const $compile = $injector.get('$compile');
+export const MyApp = ng.module('MyApp', ['pascalprecht.translate', 'ngSanitize']);
+// const $injector = ng.injector(['ng', 'pascalprecht.translate']);
+// export const $timeout = $injector.get('$timeout');
+// export const $http = $injector.get('$http');
+// export const $q = $injector.get('$q');
+// export const $compile = $injector.get('$compile');
 
 
 interface IBuildInNgService {
-    $filter: angular.IFilterService;
-    $timeout: angular.ITimeoutService;
-    $http: angular.IHttpService;
-    $compile: angular.ICompileService;
-    $q: angular.IQService;
+  $filter: angular.IFilterService;
+  $timeout: angular.ITimeoutService;
+  $http: angular.IHttpService;
+  $compile: angular.ICompileService;
+  $q: angular.IQService;
 }
 export const $service: IBuildInNgService = {
-    $timeout: $injector.get('$timeout'),
-    $http: $injector.get('$http'),
+  // $timeout: $injector.get('$timeout'),
+  // $http: $injector.get('$http'),
 } as any;
 
 
 MyApp.run(['$filter', '$timeout', '$http', '$q', '$compile', (
-    filter: any,
-    timeout: any,
-    http: any,
-    q: any,
-    compile: any) => {
-    $service.$filter = filter;
-    $service.$timeout = timeout;
-    $service.$http = http;
-    $service.$q = q;
-    $service.$compile = compile;
+  filter: any, timeout: any, http: any, q: any, compile: any) => {
+  $service.$filter = filter;
+  $service.$timeout = timeout;
+  $service.$http = http;
+  $service.$q = q;
+  $service.$compile = compile;
+  console.log('service ready');
 }]);
-
-i18n.load().then(({ data, code }) => {
-    MyApp.config(['$translateProvider', function ($translateProvider: any) {
-        $translateProvider.translations(code, data);
-        $translateProvider.preferredLanguage(code);
-    }]);
-    ng.bootstrap(document.body, ['MyApp']);
+MyApp.config(['$translateProvider', function ($translateProvider: ng.translate.ITranslateProvider) {
+  const { code, data } = window.LANG;
+  $translateProvider.translations(code, data);
+  $translateProvider.preferredLanguage(code);
+  $translateProvider.useSanitizeValueStrategy('escape');
+  console.log('lang ready');
+}]);
+$(function () {
+  console.log('boot start');
+  ng.bootstrap(document.body, ['MyApp']);
+  console.log('boot end');
 });
+
+console.log('init app module end');

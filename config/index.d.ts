@@ -1,11 +1,12 @@
 
 declare module 'config' {
-    export default config;
+  export default config;
 }
 
-interface Config{
-    env: string;
-    host: string;
+interface Config {
+  env: string;
+  host: string;
+  cdn: string;
 }
 
 

@@ -1,4 +1,4 @@
-
+console.log('init personDetail component module start');
 // 此处展示了用语言级模块放置导入angular内置服务的方式
 import {MyApp} from '../app';
 // 直接导入样式,在webpack.config.ts配置文件中指定了对应的
@@ -62,3 +62,4 @@ MyApp.component('personDetail', {
     template: require('./template.pug')(),
     controller: PersonDetailController,
 });
+console.log('init personDetail component module end');
