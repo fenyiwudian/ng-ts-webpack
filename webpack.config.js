@@ -71,9 +71,8 @@ module.exports = (env) => {
           use: [{
             loader: 'file-loader',
             options: {
-              name: local ? '[name].[ext]' : '[name]-[hash:8].[ext]',
+              name: local ? '[path][name].[ext]' : '[path][name]-[hash:8].[ext]',
               context: '',
-              publicPath: 'asstes/'
             }
           }]
 
