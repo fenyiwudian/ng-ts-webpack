@@ -67,12 +67,13 @@ module.exports = (env) => {
         { test: /\.html$/, use: ["html-loader"] },
         { test: /\.pug$/, use: ["pug-loader"] },
         {
-          test: /\.(png|gif|jpe?g)$/,
+          test: /\.(svg|png|gif|jpe?g)$/,
           use: [{
             loader: 'file-loader',
             options: {
               name: local ? '[name].[ext]' : '[name]-[hash:8].[ext]',
               context: '',
+              publicPath: 'asstes/'
             }
           }]
 
