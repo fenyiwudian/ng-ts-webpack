@@ -1,5 +1,5 @@
 const fs = require('fs');
-const hasha = require('hasha');
+const {getHash} = require('./lang-hash');
 class LangPlugin {
   constructor(options) {
     this.options = options || {};
@@ -17,7 +17,7 @@ class LangPlugin {
         let content = '';
         const origin = fs.readFileSync(`${directory}/${file}`).toString();
         const hash = local
-          ? '' : '-' + hasha(origin).substr(0, 8);
+          ? '' : '-' + getHash(langCode, origin);
         const replaced = origin.replace('export default', 'content = ');
         content = eval(replaced);
         const text = JSON.stringify(content);
@@ -34,8 +34,10 @@ class LangPlugin {
 
       const assetsKeys = Object.keys(compilation.assets);
 
-      const bundleKey = assetsKeys.find(key => key.includes('bundle'));
-      const langKey = assetsKeys.find(key => key.includes('lang'));
+      const bundleKey = assetsKeys.find(key => {
+        return key.match(/bundle(.+)?\.js/);
+      });
+      const langKey = assetsKeys.find(key => key.match(/lang(.+)?\.js/));
 
       const originSrc = compilation.assets[langKey].source();
       const newSrc = originSrc.replace('bundle.js', prefix + '/' + bundleKey)

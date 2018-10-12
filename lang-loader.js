@@ -1,4 +1,4 @@
-const hasha = require('hasha');
+const {getHash} = require('./lang-hash');
 const loaderUtils = require("loader-utils");
 module.exports = function (source) {
     const { local } = loaderUtils.getOptions(this);
@@ -6,7 +6,7 @@ module.exports = function (source) {
     const end = this.resourcePath.lastIndexOf('.');
     const code = this.resourcePath.substring(start, end);
     const hash = local
-        ? '' : '-' + hasha(source).substr(0, 8);
+        ? '' : '-' + getHash(code, source);
     const parsed = `export default "${code}${hash}.json"`;
     return parsed;
 };
