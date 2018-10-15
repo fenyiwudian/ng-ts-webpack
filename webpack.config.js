@@ -21,6 +21,8 @@ module.exports = (env) => {
   const local = env.NODE_ENV === 'local';
 
   const cdn = cdnConfig[env.NODE_ENV];
+
+
   return {
     optimization: {
       minimizer: [
@@ -32,6 +34,8 @@ module.exports = (env) => {
       jquery: ['jquery'],
       lang: './src/lang.ts',
       bundle: './src/index.ts',
+      page1: './src/page_1/index.ts',
+      page2: './src/page_2/index.ts'
     },
     output: {
       filename: local ? '[name].js' : '[name]-[contenthash:8].js',
@@ -96,7 +100,20 @@ module.exports = (env) => {
         template: './src/index.pug',
         filename: 'index.html',
         prefix: cdn + '/',
+        excludeChunks: ['page1', 'page2'],
         excludeAssets: [/bundle.*\.js/]
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/page_1/index.pug',
+        filename: 'page1/index.html',
+        prefix: cdn + '/',
+        excludeChunks: ['lang', 'page2', 'bundle'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/page_2/index.pug',
+        filename: 'page2/index.html',
+        prefix: cdn + '/',
+        excludeChunks: ['lang', 'page1', 'bundle'],
       }),
       new HtmlWebpackExcludeAssetsPlugin(),
       new HtmlWebpackPrefixPlugin(),
@@ -109,6 +126,7 @@ module.exports = (env) => {
         local,
         prefix: cdn,
         jsBefore: 'lang',
+        include: ['index.html'],
         vendors: {
           'vendor.css': [
             "node_modules/swiper/dist/css/swiper.css",

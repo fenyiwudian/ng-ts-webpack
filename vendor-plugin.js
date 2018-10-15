@@ -7,7 +7,7 @@ class VendorPlugin {
     this.options = options || {};
   }
   apply(compiler) {
-    const { options: { local, vendors, jsBefore, prefix } } = this;
+    const { options: { local, vendors, jsBefore, prefix, include } } = this;
 
     const dataList = [];
     Object.keys(vendors).forEach(key => {
@@ -47,17 +47,19 @@ class VendorPlugin {
       compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync(
         'VendorPlugin',
         (data, cb) => {
-          dataList.forEach(temp => {
-            if (temp.fileName.endsWith('.js')) {
-              const origin = `<script type="text/javascript" src="${prefix}/${jsBefore}`;
-              data.html = data.html.replace(origin,
-                `<script type="text/javascript" src="${prefix}/${temp.fileName}"></script>${origin}`);
-            } else if (temp.fileName.endsWith('.css')) {
-              const origin = '</head>';
-              data.html = data.html.replace(origin,
-                `<link rel="stylesheet" href="${prefix}/${temp.fileName}"/></head>`);
-            }
-          });
+          if (include.indexOf(data.outputName) > -1) {
+            dataList.forEach(temp => {
+              if (temp.fileName.endsWith('.js')) {
+                const origin = `<script type="text/javascript" src="${prefix}/${jsBefore}`;
+                data.html = data.html.replace(origin,
+                  `<script type="text/javascript" src="${prefix}/${temp.fileName}"></script>${origin}`);
+              } else if (temp.fileName.endsWith('.css')) {
+                const origin = '</head>';
+                data.html = data.html.replace(origin,
+                  `<link rel="stylesheet" href="${prefix}/${temp.fileName}"/></head>`);
+              }
+            });
+          }
           cb(null, data);
         }
       );
