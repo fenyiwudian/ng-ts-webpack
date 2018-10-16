@@ -26,6 +26,17 @@ const ComposeMixin = <T extends Constructor<Person>>(Base: T) => {
         return value + 'value is too hard for compose';
       }
     }
+
+    collect() {
+      return super.collect().concat(['compose', this.composeGrade.toString()]);
+    }
+
+    export() {
+      return {
+        ...super.export(),
+        composeGrade: this.composeGrade,
+      };
+    }
   };
 };
 export default ComposeMixin;

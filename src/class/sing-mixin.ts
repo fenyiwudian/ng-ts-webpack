@@ -21,6 +21,17 @@ const SingMixin = <T extends Constructor<Person>>(Base: T) => {
         return value + 'value is too hard for sing';
       }
     }
+
+    collect() {
+      return super.collect().concat(['sing', this.singGrade.toString()]);
+    }
+
+    export() {
+      return {
+        ...super.export(),
+        singGrade: this.singGrade,
+      };
+    }
   };
 };
 export default SingMixin;

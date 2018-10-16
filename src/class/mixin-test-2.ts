@@ -1,68 +1,52 @@
-import { Constructor } from "./mixin-core";
-
-
-class Name {
-  name: string;
-  constructor(data: { name: string }) {
-    this.name = data.name;
+class Point {
+  constructor(public x: number, public y: number) { }
+  export() {
+    return { x: this.x, y: this.y };
   }
 }
-
-class Name2 {
-  name: string;
-  haha: string;
-  constructor(data: { name: string }) {
-    this.name = data.name;
-  }
-}
-
-class Not {
-  name1: string;
-  haha: string;
-  constructor(data: { name: string }) {
-    this.name1 = data.name;
-  }
-}
-
-/**
- * 生成一个掺元age能力掺元工厂,任何满足类型Name格式的类型都可以有资格掺元age能力
- * 不满足Name的格式的类型无法掺元该age能力
- * @param Base 基类
- */
-const AgeMixin = <T extends Constructor<Name>>(Base: T) => {
+type Constructor<T> = new (...args: any[]) => T;
+function Tagged<T extends Constructor<Point>>(Base: T) {
   return class extends Base {
-    age: number;
+    _tag: string;
     constructor(...args: any[]) {
       super(...args);
-      // super();
-      this.age = args[0].age;
+      this._tag = "";
+    }
+    export() {
+      return {
+        ...super.export(),
+        _tag: this._tag,
+      };
     }
   };
-};
-// Name就是Name,当然满足Name所要求的格式,可以掺元age能力
-class Person extends AgeMixin(Name) {
-  gender: string;
-  constructor(data: { age: number, name: string, gender: string }) {
-    super(data);
-    this.gender = data.gender;
-  }
 }
 
-const person = new Person({ name: 'someone', age: 10, gender: 'male' });
+const TaggedPoint = Tagged(Point);
 
-// Name2是Name的超集,当然满足Name的格式,也可以掺元age能力
-class Person2 extends AgeMixin(Name2) {
-  gender: string;
-  constructor(data: { age: number, name: string, gender: string }) {
-    super(data);
-    this.gender = data.gender;
-  }
+let tag = new TaggedPoint(10, 20);
+tag._tag = "hello";
+// typescript does not complaint about ._tag
+console.log(tag.export()._tag);
+function Madded<T extends Constructor<Point>>(Base: T) {
+  return class extends Base {
+    _mad: string;
+    constructor(...args: any[]) {
+      super(...args);
+      this._mad = "";
+    }
+    export() {
+      return {
+        ...super.export(),
+        _mad: this._mad,
+      };
+    }
+  };
 }
-// Not不满足Name类型的格式,无法掺元age能力,会报错
-// class Person3 extends AgeMixin(Not) {
-//   gender: string;
-//   constructor(data: { age: number, name: string, gender: string }) {
-//     super(data);
-//     this.gender = data.gender;
-//   }
-// }
+
+
+const MadedTaggedPoint = Madded(TaggedPoint);
+const mad = new MadedTaggedPoint(10, 20);
+// typescript complaints:
+// [ts] Property '_tag' does not exist on type '{ _mad: string; x: number; y: number; }'.
+// because MadedTaggedPoint mixed TaggedPoint, so I thought mad.export() shuold have _tag property
+// console.log(mad.export()._tag);

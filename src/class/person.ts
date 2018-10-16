@@ -25,4 +25,15 @@ export default class Person {
   validateBreakWhen(result: string) {
     return !!result;
   }
+
+  collect() {
+    return [this.name];
+  }
+
+  export() {
+    return {
+      name: this.name,
+    };
+  }
+
 }

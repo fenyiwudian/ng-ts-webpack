@@ -21,6 +21,15 @@ const PianoMixin = <T extends Constructor<Person>>(Base: T) => {
         return value + 'value is too hard for piano';
       }
     }
+    collect() {
+      return super.collect().concat(['piano', this.pianoGrade.toString()]);
+    }
+    export() {
+      return {
+        ...super.export(),
+        pianoGrade: this.pianoGrade,
+      };
+    }
   };
 };
 
