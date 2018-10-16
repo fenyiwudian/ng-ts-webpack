@@ -14,4 +14,15 @@ export default class Person {
   show() {
     console.log(`${this.intro()} / ${this.play()}`);
   }
+
+  validate(value: number) {
+    if (value > 10) {
+      return value + ' is too hard for person';
+    }
+    return '';
+  }
+
+  validateBreakWhen(result: string) {
+    return !!result;
+  }
 }

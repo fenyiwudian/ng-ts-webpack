@@ -63,19 +63,8 @@ class Musician extends mix(Person)
       + `singGrade:${data.singGrade} composeGrade: ${data.composeGrade}`;
   }
 }
-
-const mu = new Musician({ name: 'lqq', pianoGrade: 2, singGrade: 3, composeGrade: 4 });
+// @ts-ignore
+const mu = window.mu = new Musician({ name: 'lqq', pianoGrade: 2, singGrade: 6, composeGrade: 9 });
 
 mu.show();
-
-
-type StringParam = (a: string) => string;
-
-type GenericParam = <T>(a: T) => T;
-
-const goString = (fn: StringParam) => {
-  return fn;
-};
-goString(() => {
-  return '';
-});
+console.log(mu.validate(6));

@@ -11,6 +11,16 @@ const SingMixin = <T extends Constructor<Person>>(Base: T) => {
     play() {
       return super.play() + ` / sing a song, grade: ${this.singGrade}`;
     }
+
+    validate(value: number) {
+      const baseResult = super.validate(value);
+      if (this.validateBreakWhen(baseResult)) {
+        return baseResult;
+      }
+      if (value > this.singGrade) {
+        return value + 'value is too hard for sing';
+      }
+    }
   };
 };
 export default SingMixin;

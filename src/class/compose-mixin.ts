@@ -17,6 +17,15 @@ const ComposeMixin = <T extends Constructor<Person>>(Base: T) => {
     play() {
       return 'compose a song grade: ' + this.composeGrade;
     }
+    validate(value: number) {
+      const baseResult = super.validate(value);
+      if (this.validateBreakWhen(baseResult)) {
+        return baseResult;
+      }
+      if (value > this.composeGrade) {
+        return value + 'value is too hard for compose';
+      }
+    }
   };
 };
 export default ComposeMixin;
