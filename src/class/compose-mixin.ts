@@ -3,9 +3,9 @@
 // 具体参照 https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#typescript-22
 
 
-import { Constructor } from "./mixin";
+import { Constructor, Mixin } from "./mixin-core";
 import Person from "./person";
-
+export type Mixin<B> = <T extends Constructor<B>>(Base: T) => T;
 
 const ComposeMixin = <T extends Constructor<Person>>(Base: T) => {
   return class MComposeMixin extends Base {

@@ -1,5 +1,5 @@
 import Person from "./person";
-import { Constructor } from "./mixin";
+import { Constructor, Mixin } from "./mixin-core";
 
 const SingMixin = <T extends Constructor<Person>>(Base: T) => {
   return class MSingMixin extends Base {

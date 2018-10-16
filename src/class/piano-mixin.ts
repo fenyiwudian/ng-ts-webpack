@@ -1,6 +1,5 @@
-import { Constructor } from "./mixin";
+import { Constructor, Mixin } from "./mixin-core";
 import Person from "./person";
-import { thisTypeAnnotation } from "babel-types";
 
 
 const PianoMixin = <T extends Constructor<Person>>(Base: T) => {
