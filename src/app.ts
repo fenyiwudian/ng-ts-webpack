@@ -25,7 +25,6 @@
 // 这种情况,因为组件的控制器已经改为一个class,所以依赖项会被注入到构造函数中.
 // 而依赖项正好使用这个class的静态属性$inject来指定,
 // 这个使用方法在在person-detail/component.ts有演示.
-console.log('init app module start');
 // @ts-ignore
 export const ng = angular;
 export const MyApp = ng.module('MyApp', ['pascalprecht.translate', 'ngSanitize']);
@@ -56,7 +55,6 @@ MyApp.run(['$filter', '$timeout', '$http', '$q', '$compile', (
   $service.$http = http;
   $service.$q = q;
   $service.$compile = compile;
-  console.log('service ready');
 }]);
 MyApp.config(['$translateProvider', function ($translateProvider: ng.translate.ITranslateProvider) {
   const { code, data } = window.LANG;
@@ -64,12 +62,8 @@ MyApp.config(['$translateProvider', function ($translateProvider: ng.translate.I
   $translateProvider.preferredLanguage(code);
   $translateProvider.useSanitizeValueStrategy('escape');
   window.LANG.ngReady = true;
-  console.log('lang ready');
 }]);
 $(function () {
-  console.log('boot start');
   ng.bootstrap(document.body, ['MyApp']);
-  console.log('boot end');
 });
 
-console.log('init app module end');

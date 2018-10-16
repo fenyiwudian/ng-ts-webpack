@@ -1,4 +1,4 @@
-console.log('init i18n module start');
+
 import { $service } from '../app';
 class I18N {
   private code = '';
@@ -37,4 +37,3 @@ class I18N {
   }
 }
 export default new I18N();
-console.log('init i18n module end');

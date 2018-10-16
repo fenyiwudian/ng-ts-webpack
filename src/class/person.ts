@@ -1,11 +1,17 @@
-console.log('init Person module start');
+
 export default class Person {
   name: string;
-  constructor(name = 'no name') {
-    this.name = name;
+  constructor(data: { name: string }) {
+    this.name = data.name;
+  }
+  intro() {
+    return `name:${this.name}`;
   }
   play() {
-    console.log('play something normal');
+    return 'play something normal';
+  }
+
+  show() {
+    console.log(`${this.intro()} / ${this.play()}`);
   }
 }
-console.log('init Person module end');

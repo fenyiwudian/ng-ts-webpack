@@ -1,13 +1,18 @@
-console.log('init musician module start');
+
 import Person from "./person";
 import ComposeMixin from "./compose-mixin";
 import SingMixin from "./sing-mixin";
 import PianoMixin from "./piano-mixin";
 
-
-class Musician extends Person implements ComposeMixin, SingMixin, PianoMixin {
-
+class Musician extends PianoMixin(SingMixin(ComposeMixin(Person))) {
+  ability: string;
+  constructor(data: { name: string, pianoGrade: number, singGrade: number, composeGrade: number }) {
+    super(data);
+    this.ability = `name:${data.name} pianoGrade: ${data.pianoGrade}`
+      + `singGrade:${data.singGrade} composeGrade: ${data.composeGrade}`;
+  }
 }
-export default Musician;
 
-console.log('init musician module end');
+const mu = new Musician({ name: 'lqq', pianoGrade: 2, singGrade: 3, composeGrade: 4 });
+
+mu.show();

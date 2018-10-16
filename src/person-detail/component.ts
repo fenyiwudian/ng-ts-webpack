@@ -1,4 +1,4 @@
-console.log('init personDetail component module start');
+
 // 此处展示了用语言级模块放置导入angular内置服务的方式
 import { MyApp } from '../app';
 // 直接导入样式,在webpack.config.ts配置文件中指定了对应的
@@ -7,14 +7,6 @@ import { MyApp } from '../app';
 import './style.less';
 
 import i18n from '../service/i18n';
-
-console.log(i18n.translate('LANG.person.hello'));
-console.log(i18n.translate('LANG.person.message', {
-  name: 'hehe',
-  gold: 1000,
-  attack: 5000,
-  armor: 10000,
-}));
 
 class PersonDetailController {
   // 依赖注入
@@ -35,8 +27,6 @@ class PersonDetailController {
       armor: 100,
     };
     this.$element = $element;
-    console.log(i18n.translate('LANG.person.hello'));
-    console.log(i18n.translate('LANG.person.message', this.person));
   }
   // component的生命周期函数之一
   $postLink() {
@@ -72,4 +62,4 @@ MyApp.component('personDetail', {
   template: require('./template.pug')(),
   controller: PersonDetailController,
 });
-console.log('init personDetail component module end');
+
