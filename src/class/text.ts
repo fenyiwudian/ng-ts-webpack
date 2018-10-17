@@ -4,6 +4,13 @@ class Point {
     return { x: this.x, y: this.y };
   }
 }
+
+interface HEHEHE {
+  a: 0;
+}
+
+type HAHAHA = () => any;
+
 type Constructor<T> = new (...args: any[]) => T;
 type OverrideExportReturn<T extends Constructor<Point>, TNewReturn> = {
   new(...args: (T extends new (...a: infer A) => any ? A : [])):
