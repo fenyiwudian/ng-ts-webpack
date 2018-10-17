@@ -106,5 +106,5 @@ class Musician2 extends ComposeMixin(PianoMixin(SingMixin(Person))) {
 const mu2 = new Musician2({ name: 'lqq', pianoGrade: 2, singGrade: 6, composeGrade: 9 });
 const exported2 = mu2.export();
 // 多重掺元后,无法正确识别掺元后组合方法返回对象的属性
-// 这种情况不多,如果出现这样的使用场合,在基类中显示标记返回值格式.
+// 这种情况不多,如果出现这样的使用场合,在基类中显式标记返回值格式.
 console.log(exported2.composeGrade);
