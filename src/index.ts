@@ -6,3 +6,18 @@ import './person-detail/component';
 // webpack才能正确生成一颗模块树,正确的包含需要用到的代码;
 import './class/mixin-core';
 import './class/musician';
+import Team from './circular-depend/Team';
+// import {FirstClass} from './circular-depend/FirstClass';
+// import {SecondClass} from './circular-depend/SecondClass';
+// import {ThirdClass} from './circular-depend/ThirdClass';
+
+// const first = new FirstClass();
+// first.say();
+// const second = new SecondClass();
+// second.say();
+// const third = new ThirdClass();
+// third.say();
+
+const team = new Team();
+
+team.show();
