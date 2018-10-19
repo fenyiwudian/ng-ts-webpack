@@ -1,9 +1,9 @@
-import Worker from "./Worker";
+import MyWorker from "./Worker";
 
 export default class Team {
-  workers: Worker[];
-  constructor(){
-    this.workers = [new Worker(this)];
+  workers: MyWorker[];
+  constructor() {
+    this.workers = [new MyWorker(this)];
   }
   show() {
     console.log(this.workers);

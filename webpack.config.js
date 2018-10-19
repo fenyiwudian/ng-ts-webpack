@@ -49,7 +49,7 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /lang\/.+\.ts$/,
+          test: /lang[/\\].+\.ts$/,
           use: {
             loader: './lang-loader.js',
             options: {
