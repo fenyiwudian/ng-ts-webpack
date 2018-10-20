@@ -11,6 +11,8 @@ import FirstClass from './circular-depend/FirstClass';
 import MyWorker from './circular-depend/Worker';
 import SecondClass from './circular-depend/SecondClass';
 import ThirdClass from './circular-depend/ThirdClass';
+import Singleton from './singleton/Singleton';
+import { S1 } from './singleton/S1';
 
 const first = new FirstClass();
 first.say();
@@ -26,4 +28,11 @@ const team = new Team();
 team.show();
 
 
+const a  = Singleton.inst;
+const b = Singleton.inst;
+console.log(a === b);
 
+const aa = S1.inst;
+const bb = S1.inst;
+console.log(aa === bb);
+console.log(aa === a);
