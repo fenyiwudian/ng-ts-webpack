@@ -28,11 +28,11 @@
 // @ts-ignore
 export const ng = angular;
 export const MyApp = ng.module('MyApp', ['pascalprecht.translate', 'ngSanitize']);
-// const $injector = ng.injector(['ng', 'pascalprecht.translate']);
+const $injector = ng.injector(['ng', 'pascalprecht.translate']);
 // export const $timeout = $injector.get('$timeout');
 // export const $http = $injector.get('$http');
 // export const $q = $injector.get('$q');
-// export const $compile = $injector.get('$compile');
+export const $compile = $injector.get('$compile');
 
 
 interface IBuildInNgService {

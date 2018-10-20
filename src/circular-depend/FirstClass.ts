@@ -1,14 +1,16 @@
-import { SecondClass } from "./SecondClass";
+import SecondClass from "./SecondClass";
+import injector from "../injector";
 
-export class FirstClass {
+export default class FirstClass {
   a = 1;
   name = 'first';
   second: SecondClass;
   constructor() {
-    // this.second = new SecondClass();
+
   }
   say() {
-
-    console.log(this.name);
+    const S = injector.get('SecondClass');
+    this.second = new S();
+    console.log(this.name, this.second.b);
   }
 }

@@ -1,8 +1,8 @@
-import {SecondClass} from "./SecondClass";
+import SecondClass from "./SecondClass";
 
 
 
-export class ThirdClass extends SecondClass {
+export default class ThirdClass extends SecondClass {
   c = 3;
   name = "third";
 }
